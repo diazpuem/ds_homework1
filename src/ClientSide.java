@@ -1,7 +1,6 @@
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ClientSide {
@@ -11,7 +10,7 @@ public class ClientSide {
         System.out.println("Please enter IP address: ");
         String host = scanner.nextLine();
         scanner.close();
-        int port = Integer.parseInt(args[1]);
+        int port = Integer.parseInt(args[0]);
         try (Socket socket = new Socket(host, port)) {
             InputStream inputStream = socket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
