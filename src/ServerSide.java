@@ -12,15 +12,13 @@ public class ServerSide {
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("The Server is running");
+            int numberOfClients = 0;
             while (true) {
                 Socket socket = serverSocket.accept();
                 OutputStream output = socket.getOutputStream();
                 PrintWriter writer = new PrintWriter(output, true);
-                writer.println(new Date());
-                InputStream inputStream = socket.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                String receivedMessage = reader.readLine();
-                System.out.println(receivedMessage);
+                writer.println("Hello you are client #" + ++numberOfClients);
+                new ServerThread(socket).start();
             }
         } catch (IOException e) {
             System.out.println("Server exception " + e.getMessage());
